@@ -27,7 +27,7 @@ public class OrderController {
         return JsonResult.ok(order);
     }
 
-    @GetMapping("/")
+    @GetMapping("/add")
     public JsonResult addOrder() {
         //模拟post提交的数据
         Order order = new Order();
