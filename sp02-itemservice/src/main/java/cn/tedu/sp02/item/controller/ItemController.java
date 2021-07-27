@@ -8,6 +8,7 @@ import tedu.sp01.service.ItemService;
 import tedu.web.util.JsonResult;
 
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @Slf4j
@@ -16,7 +17,7 @@ public class ItemController {
     private ItemService itemService;
     //获取商品列表
     @GetMapping("/{orderID}")
-    public JsonResult<List<Item>> getItems(@PathVariable String orderID){
+    public JsonResult<List<Item>> getItems(@PathVariable String orderID) throws InterruptedException {
         /*
         * JsonResult -响应结构的封装对象
         * -code 响应状态码
@@ -24,6 +25,14 @@ public class ItemController {
         *-data 响应数据对象
         * */
         List<Item> items = itemService.getItems(orderID);
+
+        if(Math.random()<0.9) {
+            //90%概率延迟代码
+            int t = new Random().nextInt(5000);//随机延迟0-5s
+            System.out.println("延迟时间："+t);
+            Thread.sleep(t);
+        }
+
         return JsonResult.ok().data(items);
     }
 
