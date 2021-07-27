@@ -13,9 +13,24 @@ eureka:
 
 
 
-
 zuul:
   routes:
     item-service: /item-service/**
     user-service: /user-service/**
     order-service: /order-service/**
+  retryable: true
+#Hystrix超时，如果不开启ribbon重试，默认为1s
+#hystrix:
+#  command:
+#    default:
+#      isolation:
+#        thread:
+#          timeoutInMilliseconds: 500
+
+#暴露全部日志
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
